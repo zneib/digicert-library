@@ -2,6 +2,7 @@ import { useState, useEffect } from 'react';
 import './App.css';
 import styled from 'styled-components';
 import Book from './components/Book';
+import GlobalState from './context/globalState';
 
 type BookType = {
   title: string;
@@ -29,14 +30,16 @@ function App() {
   }, [])
 
   return (
-    <div className="App">
-      <h1>All Library Books</h1>
-      <BooksLayout>
-        {books.length > 0 && books.map((book: BookType) => (
-          <Book key={book.id} title={book.title} author={book.author} />
-        ))}
-      </BooksLayout>
-    </div>
+    <GlobalState>
+      <div className="App">
+        <h1>All Library Books</h1>
+        <BooksLayout>
+          {books.length > 0 && books.map((book: BookType) => (
+            <Book key={book.id} id={book.id} title={book.title} author={book.author} />
+          ))}
+        </BooksLayout>
+      </div>
+    </GlobalState>
   );
 }
 
